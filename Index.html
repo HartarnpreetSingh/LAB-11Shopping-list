@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Shopping List</h1>
+  <label for="newItem">Enter a new item:</label>
+  <input type="text" id="newItem">
+  <button id="addItem">Add Item</button>
+  <ul id="shoppingList">
+    <!-- Existing items will be added here -->
+  </ul>
+  <script>
+    // Step 1: Create variables to hold references to the list, input, and button elements
+    const shoppingList = document.getElementById('shoppingList');
+    const input = document.getElementById('newItem');
+    const addButton = document.getElementById('addItem');
+
+    // Step 2: Create a function that will run in response to the button being clicked
+    function addItemToList() {
+      // Step 3: Store the current value of the input element in a variable
+      const itemValue = input.value;
+
+      // Step 4: Empty the input element
+      input.value = '';
+
+      // Step 5: Create new elements (list item, span, and button)
+      const listItem = document.createElement('li');
+      const span = document.createElement('span');
+      const deleteButton = document.createElement('button');
+
+      // Step 6: Append the span and button as children of the list item
+      listItem.appendChild(span);
+      listItem.appendChild(deleteButton);
+
+      // Step 7: Set the text content of the span and button
+      span.textContent = itemValue;
+      deleteButton.textContent = 'Delete';
+
+      // Step 8: Append the list item as a child of the list
+      shoppingList.appendChild(listItem);
+
+      // Step 9: Attach an event handler to the delete button to remove the list item
+      deleteButton.addEventListener('click', function() {
+        shoppingList.removeChild(listItem);
+      });
+
+      // Step 10: Use the focus() method to focus the input element for the next item
+      input.focus();
+    }
+
+    // Step 11: Attach the event listener to the add button
+    addButton.addEventListener('click', addItemToList);
+  </script>
+</body>
+</html>
